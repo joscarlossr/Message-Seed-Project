@@ -1,5 +1,6 @@
 import { Message } from './message.model';
 import { Component, EventEmitter, Input, Output } from "@angular/core";
+import { MessageService } from './message.services';
 
 @Component({
     selector: 'app-message',
@@ -39,5 +40,10 @@ export class MessageComponent {
         // alert('Esta funcionando...');
         this.editClicked_MessageMetodoClasse.emit("Texto veio de message (child) para o app (pai)");
         this.editClicked_MessageMetodoClasseAlias.emit("Texto veio de message (child) para o app (pai) - Alias");
+    }
+
+    constructor(private messageServiceObj: MessageService){ }
+    onDelete(){
+        this.messageServiceObj.deleteMessage(this.messageVarClasse);
     }
 }

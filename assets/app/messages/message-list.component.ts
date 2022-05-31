@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Message } from "./message.model";
-import { MessageService } from "./message.service";
+import { MessageService } from "./message.services";
 
 @Component({
     selector: 'app-message-list',
@@ -27,6 +27,14 @@ export class MessageListComponent implements OnInit {
     ngOnInit(): void {
         //messageS aponta para o array messageSService
         // que armazena os dados
-        this.messageS = this.messageService.getMessages();
-    }
-}
+        // this.messageS = this.messageService.getMessages();
+        this.messageService.getMessages()
+            .subscribe(
+                (dadosSucesso: Message[]) => {
+                    this.messageS = dadosSucesso,
+                    console.log(dadosSucesso)
+                },
+                dadosErro => console.log(dadosErro)
+            );
+    };
+};
